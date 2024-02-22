@@ -1,3 +1,3 @@
 #GoatFinder
 
-App Android hecha con Ionic Angular.
+App para Android hecha con Ionic Angular.

@@ -1,0 +1,7 @@
+{
+  "name": "goatfinder",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

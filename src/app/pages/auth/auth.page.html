@@ -1,0 +1,17 @@
+<app-header title="Inicia sesión"></app-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="d-flex-center">
+    <form [formGroup]="form" class="auth-form">
+
+      <app-custom-input autocomplete="email" icon="mail-outline" [formControl]="form.controls.email" type="email"
+        label="Correo"></app-custom-input>
+
+      <app-custom-input icon="lock-closed-outline" [formControl]="form.controls.password" type="password"
+        label="Contraseña"></app-custom-input>
+
+    </form>
+  </div>
+
+</ion-content>

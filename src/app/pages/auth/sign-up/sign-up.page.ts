@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/models/user.model';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,9 +11,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpPage implements OnInit {
 
-  constructor() { }
+  form = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
+  })
+
+  firebaseService = inject(FirebaseService);
+  utilsService = inject(UtilsService);
 
   ngOnInit() {
+  }
+
+  async submit() {
+    if (this.form.valid) {
+      const loading = await this.utilsService.loading();
+      await loading.present();
+
+      this.firebaseService.signUp(this.form.value as User).then(async res => {
+        await this.firebaseService.updateUser(this.form.value.name);
+        console.log(res);
+      }).catch(er => {
+        console.log(er);
+        this.utilsService.presentToast({
+          message: er.message,
+          duration: 5000,
+          color: 'danger',
+          position: 'top',
+          icon: 'alert-circle-outline'
+        })
+      }).finally(() => {
+        loading.dismiss();
+      })
+    }
   }
 
 }

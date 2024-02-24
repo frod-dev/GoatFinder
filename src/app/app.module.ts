@@ -14,7 +14,8 @@ import { AppRoutingModule } from './app-routing.module';
 
     IonicModule.forRoot({
       scrollPadding: false,
-      scrollAssist: false
+      scrollAssist: false,
+      mode: 'md'
     }),
     
     AppRoutingModule

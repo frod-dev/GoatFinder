@@ -16,7 +16,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ReactiveFormsModule,
     IonicModule,
     AuthPageRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [AuthPage]
 })

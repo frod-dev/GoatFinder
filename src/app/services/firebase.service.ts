@@ -12,16 +12,16 @@ export class FirebaseService {
 
   // Iniciar sesión.
   signIn(user: User) {
-    return signInWithEmailAndPassword(getAuth(), user.email, user.password)
+    return signInWithEmailAndPassword(getAuth(), user.email, user.password);
   }
 
   // Registrar.
   signUp(user: User) {
-    return createUserWithEmailAndPassword(getAuth(), user.email, user.password)
+    return createUserWithEmailAndPassword(getAuth(), user.email, user.password);
   }
 
   updateUser(displayName: string) {
-    return updateProfile(getAuth().currentUser, {displayName})
+    return updateProfile(getAuth().currentUser, {displayName});
   }
 
 }

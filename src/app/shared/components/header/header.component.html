@@ -1,8 +1,22 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+
+      <!-- Back button -->
+      <ion-back-button *ngIf="backButton" [defaultHref]="backButton"></ion-back-button>
+
+      <!-- Dismiss modal -->
+      <ion-button color="light" fill="clear" (click)="dismissModal()" *ngIf="isModal">
+        <ion-icon slot="icon-only" name="arrow-undo-circle-outline"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+
     <ion-title>
       <div class="admin">G o a t F i n d e r</div>
       <strong>{{title}}</strong>
     </ion-title>
+
   </ion-toolbar>
 </ion-header>

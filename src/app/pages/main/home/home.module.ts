@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AuthPageRoutingModule } from './auth-routing.module';
+import { HomePageRoutingModule } from './home-routing.module';
 
-import { AuthPage } from './auth.page';
+import { HomePage } from './home.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
-    AuthPageRoutingModule,
+    HomePageRoutingModule,
     SharedModule
   ],
-  declarations: [AuthPage]
+  declarations: [HomePage]
 })
-export class AuthPageModule {}
+export class HomePageModule {}

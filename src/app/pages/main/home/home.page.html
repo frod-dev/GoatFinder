@@ -1,0 +1,18 @@
+<app-header title="Jugadores"></app-header>
+
+<ion-content [fullscreen]="true">
+  
+  <!-- NEW PLAYER -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addUpdatePlayer()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-button (click)="signOut()" expand="block" mode="ios" color="secondary">
+    Cerrar sesion
+  </ion-button>
+
+  
+
+</ion-content>

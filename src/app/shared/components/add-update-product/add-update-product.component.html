@@ -1,0 +1,104 @@
+<app-header [isModal]="true" title="Añadir jugador"></app-header>
+
+<ion-content [fullscreen]="true">
+
+    <form [formGroup]="form" class="ion-padding ion-text-center" (ngSubmit)="submit()" (keypress.enter)="submit()">
+
+        <!-- FIRST VIEW. -->
+        <!-- Name -->
+        <app-custom-input autocomplete="name" [control]="form.controls.name" type="text" label="Nombre"></app-custom-input>
+        <div class="validators" *ngIf="form.controls.name.errors && form.controls.name.touched">
+          <div *ngIf="form.controls.name.errors?.['required']">Campo es requerido</div>
+          <div *ngIf="form.controls.name.errors?.['minlength']">No puede haber un nombre con menos de 4 caracteres</div>
+        </div>
+
+        <!-- Team -->
+        <app-custom-input autocomplete="team" [control]="form.controls.team" type="text" label="Equipo"></app-custom-input>
+        <div class="validators" *ngIf="form.controls.team.errors && form.controls.team.touched">
+          <div *ngIf="form.controls.team.errors?.['required']">Campo es requerido</div>
+          <div *ngIf="form.controls.team.errors?.['minlength']">No puede haber un equipo con menos de 4 caracteres</div>
+        </div>
+
+        <!-- Position -->
+        <app-custom-input autocomplete="position" [control]="form.controls.team" type="text" label="Posición"></app-custom-input>
+        <div class="validators" *ngIf="form.controls.position.errors && form.controls.position.touched">
+          <div *ngIf="form.controls.position.errors?.['required']">Campo es requerido</div>
+        </div>
+
+        <!-- Value -->
+        <app-custom-input autocomplete="value" [control]="form.controls.value" type="number" label="Valor de mercado (M€)"></app-custom-input>
+        <div class="validators" *ngIf="form.controls.value.errors && form.controls.value.touched">
+          <div *ngIf="form.controls.value.errors?.['required']">Campo es requerido</div>
+          <div *ngIf="form.controls.value.errors?.['min']">El valor de mercado mínimo ha de ser de 0.1M</div>
+        </div>
+        
+
+        <!-- GENERAL VIEW. -->
+        <!-- Age -->
+        <app-custom-input autocomplete="age" [control]="form.controls.age" type="number" label="Edad"></app-custom-input>
+        <div class="validators" *ngIf="form.controls.age.errors && form.controls.age.touched">
+          <div *ngIf="form.controls.age.errors?.['required']">Campo es requerido</div>
+          <div *ngIf="form.controls.age.errors?.['min']">La edad mínima es de 16 años</div>
+        </div>
+
+        <!-- Height -->
+        <app-custom-input autocomplete="height" [control]="form.controls.height" type="number" label="Altura (m)"></app-custom-input>
+        <div class="validators" *ngIf="form.controls.height.errors && form.controls.height.touched">
+          <div *ngIf="form.controls.height.errors?.['required']">Campo es requerido</div>
+          <div *ngIf="form.controls.height.errors?.['min']">La altura mínima es de 1.40m</div>
+        </div>
+
+        <!-- Country -->
+        <app-custom-input autocomplete="country" [control]="form.controls.country" type="text" label="País"></app-custom-input>
+        <div class="validators" *ngIf="form.controls.country.errors && form.controls.country.touched">
+          <div *ngIf="form.controls.country.errors?.['required']">Campo es requerido</div>
+          <div *ngIf="form.controls.country.errors?.['minlength']">El campo País tiene un mínimo de 4 caracteres</div>
+        </div>
+        
+
+        <!-- GAME STATS. -->
+        <!-- Matches -->
+        <app-custom-input autocomplete="matches" [control]="form.controls.matches" type="number" label="Partidos jugados"></app-custom-input>
+        <div class="validators" *ngIf="form.controls.matches.errors && form.controls.matches.touched">
+          <div *ngIf="form.controls.matches.errors?.['required']">Campo es requerido</div>
+          <div *ngIf="form.controls.matches.errors?.['min']">El mínimo de partidos jugados es de 0</div>
+        </div>
+
+        <!-- Goals -->
+        <app-custom-input autocomplete="goals" [control]="form.controls.goals" type="number" label="Goles"></app-custom-input>
+        <div class="validators" *ngIf="form.controls.goals.errors && form.controls.goals.touched">
+          <div *ngIf="form.controls.goals.errors?.['required']">Campo es requerido</div>
+          <div *ngIf="form.controls.goals.errors?.['min']">El mínimo de goles es de 0</div>
+        </div>
+        
+        <!-- Assists -->
+        <app-custom-input autocomplete="assists" [control]="form.controls.assists" type="number" label="Asistencias"></app-custom-input>
+        <div class="validators" *ngIf="form.controls.assists.errors && form.controls.assists.touched">
+          <div *ngIf="form.controls.assists.errors?.['required']">Campo es requerido</div>
+          <div *ngIf="form.controls.assists.errors?.['min']">El mínimo de asistencias es de 0</div>
+        </div>
+        
+        <!-- Yellows -->
+        <app-custom-input autocomplete="yellows" [control]="form.controls.yellows" type="number" label="Tarjetas amarillas"></app-custom-input>
+        <div class="validators" *ngIf="form.controls.yellows.errors && form.controls.yellows.touched">
+          <div *ngIf="form.controls.yellows.errors?.['required']">Campo es requerido</div>
+          <div *ngIf="form.controls.yellows.errors?.['min']">El mínimo de tarjetas amarillas es de 0</div>
+        </div>
+        
+        <!-- Reds -->
+        <app-custom-input autocomplete="reds" [control]="form.controls.reds" type="number" label="Tarjetas rojas"></app-custom-input>
+        <div class="validators" *ngIf="form.controls.reds.errors && form.controls.reds.touched">
+          <div *ngIf="form.controls.reds.errors?.['required']">Campo es requerido</div>
+          <div *ngIf="form.controls.reds.errors?.['min']">El mínimo de tarjetas rojas es de 0</div>
+        </div>
+
+  
+        <!-- Submit button -->
+        <ion-button color="secondary" mode="ios" shape="round" class="submit" type="ion-margin" [disabled]="form.invalid">
+          Agregar jugador
+          <ion-icon slot="end" name="person-add-outline"></ion-icon>
+        </ion-button>
+  
+      </form>
+
+</ion-content>

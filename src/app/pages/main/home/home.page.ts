@@ -3,7 +3,7 @@ import { Player } from 'src/app/models/player.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-product/add-update-product.component';
+import { AddUpdatePlayerComponent } from 'src/app/shared/components/add-update-player/add-update-player.component';
 import { orderBy } from "firebase/firestore";
 
 @Component({
@@ -64,7 +64,7 @@ export class HomePage implements OnInit {
   // Agregar/editar jugador
   async addUpdatePlayer(player?: Player) {
     let success = await this.utilsService.presentModal({
-      component: AddUpdateProductComponent,
+      component: AddUpdatePlayerComponent,
       cssClass: 'add-update-modal',
 
       componentProps: { player }

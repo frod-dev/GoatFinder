@@ -6,11 +6,11 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
-  selector: 'app-add-update-product',
-  templateUrl: './add-update-product.component.html',
-  styleUrls: ['./add-update-product.component.scss'],
+  selector: 'app-add-update-player',
+  templateUrl: './add-update-player.component.html',
+  styleUrls: ['./add-update-player.component.scss'],
 })
-export class AddUpdateProductComponent  implements OnInit {
+export class AddUpdatePlayerComponent  implements OnInit {
 
   @Input() player: Player;
   user = {} as User;

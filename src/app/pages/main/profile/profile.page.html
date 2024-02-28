@@ -1,13 +1,20 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [showMenu]="true" title="Perfil"></app-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding-top ion-text-center">
+
+  <ion-avatar>
+    <img *ngIf="user()?.image" [src]="user()?.image" />
+    <ion-icon *ngIf="!user()?.image" class="empty-icon" name="person-circle-outline"></ion-icon>
+  </ion-avatar>
+
+  <div class="user-data">
+    <h2>{{user().name}}</h2>
+    Ojeador
+  </div>
+
+  <ion-button (click)="takeImage()" class="camera-button" color="secondary" expand="block" mode="ios" shape="round">
+    Cambiar foto de perfil
+    <ion-icon slot="end" name="camera-outline"></ion-icon>
+  </ion-button>
+
 </ion-content>

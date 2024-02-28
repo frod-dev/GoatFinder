@@ -10,7 +10,6 @@ import { UtilsService } from '../services/utils.service';
 export class AuthGuard implements CanActivate {
 
   firebaseService = inject(FirebaseService);
-  utilsService = inject(UtilsService);
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,7 +22,7 @@ export class AuthGuard implements CanActivate {
           if (auth) {
             if (user) res(true);
           } else {
-            this.utilsService.routerLink('/auth');
+            this.firebaseService.signOut();
             res(false);
           }
         })

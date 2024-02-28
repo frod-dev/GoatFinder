@@ -62,6 +62,20 @@ export class AddUpdateProductComponent  implements OnInit {
     }
   }
 
+  // String->Number convert
+  setNumberInput() {
+    let {value, age, height, matches, goals, assists, yellows, reds} = this.form.controls;
+
+    if (value.value) value.setValue(parseFloat(value.value));
+    if (age.value) age.setValue(parseFloat(age.value));
+    if (height.value) height.setValue(parseFloat(height.value));
+    if (matches.value) matches.setValue(parseFloat(matches.value));
+    if (goals.value) goals.setValue(parseFloat(goals.value));
+    if (assists.value) assists.setValue(parseFloat(assists.value));
+    if (yellows.value) yellows.setValue(parseFloat(yellows.value));
+    if (reds.value) reds.setValue(parseFloat(reds.value));
+  }
+
   //Create
   async createPlayer() {
       let path = "jugadores";

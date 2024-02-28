@@ -1,0 +1,50 @@
+ion-menu {
+    --width: 254px;
+    --min-width: 254px;
+    outline: none;
+}
+
+ion-item {
+    color: var(--ion-color-tertiary);
+    &.active {
+        color: var(--ion-color-light);
+        --background: var(--ion-color-secondary);
+    }
+}
+
+ion-icon {
+    color: var(--ion-color-secondary);
+    &.active {
+        color: var(--ion-color-tertiary);
+    }
+}
+
+ion-label {
+    color: var(--ion-color-tertiary);
+    &.active {
+        color: var(--ion-color-light);
+    }
+}
+
+h4 {
+    font-weight: bold;
+    color: var(--ion-color-tertiary);
+}
+
+ion-avatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    margin-top: 8px;
+}
+.empty-icon {
+    font-size: 100px;
+    color: var(--ion-color-secondary);
+}
+
+.user-data {
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 12px;
+    background-color: var(--ion-color-primary);
+}

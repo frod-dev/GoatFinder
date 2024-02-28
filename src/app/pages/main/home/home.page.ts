@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-product/add-update-product.component';
+import { orderBy } from "firebase/firestore";
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,13 @@ export class HomePage implements OnInit {
     this.getPlayers();
   }
 
+  doRefresh(event) {
+    setTimeout(() => {
+      this.getPlayers();
+      event.target.complete();
+    }, 2000);
+  }
+
 
   // Obtener jugador
   getPlayers() {
@@ -37,7 +45,11 @@ export class HomePage implements OnInit {
 
     this.loading = true;
 
-    let sub = this.firebaseService.getCollectionData(path).subscribe({
+    let query = (
+      orderBy('value', 'desc')
+    );
+
+    let sub = this.firebaseService.getCollectionData(path, query).subscribe({
       next: (res: any) => {
         console.log(res);
         this.players = res;

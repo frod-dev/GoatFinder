@@ -13,6 +13,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class AddUpdateProductComponent  implements OnInit {
 
   @Input() player: Player;
+  user = {} as User;
 
   form = new FormGroup({
     id: new FormControl(''),
@@ -36,8 +37,6 @@ export class AddUpdateProductComponent  implements OnInit {
 
   firebaseService = inject(FirebaseService);
   utilsService = inject(UtilsService);
-
-  user = {} as User;
 
   ngOnInit() {
     this.user = this.utilsService.getFromLocalStorage('user');

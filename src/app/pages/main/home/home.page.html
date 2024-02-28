@@ -6,9 +6,14 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <!-- SEARCHBAR -->
+  <ion-toolbar>
+    <ion-searchbar (ionChange)="searchPlayer($event)" (ionInput)="searchPlayer($event)" placeholder="Buscar jugador..." inputmode="decimal" type="decimal" color="dark"></ion-searchbar>
+  </ion-toolbar>
+
   <!-- PLAYER LIST -->
   <ion-list *ngIf="!loading && players.length !== 0">
-    <ion-item-sliding class="player-item" *ngFor="let p of players">
+    <ion-item-sliding class="player-item" *ngFor="let p of searchedPlayer">
 
       <ion-item>
         <ion-avatar class="player-image" slot="start">

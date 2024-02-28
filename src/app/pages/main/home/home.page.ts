@@ -17,6 +17,7 @@ export class HomePage implements OnInit {
   utilsService = inject(UtilsService);
 
   players: Player[] = [];
+  searchedPlayer: any;
   loading: boolean = false;
 
   ngOnInit() {
@@ -53,6 +54,7 @@ export class HomePage implements OnInit {
       next: (res: any) => {
         console.log(res);
         this.players = res;
+        this.searchedPlayer = this.players;
         this.loading = false;
         sub.unsubscribe();
       }
@@ -127,6 +129,15 @@ export class HomePage implements OnInit {
           }
         }
       ]
+    });
+  }
+
+  // Searchbar
+  searchPlayer(event) {
+    const query = event.target.value.toLowerCase();
+
+    this.searchedPlayer = this.players.filter((player: any) => {
+      return player.name.toLowerCase().includes(query);
     });
   }
 

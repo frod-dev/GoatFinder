@@ -1,5 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Player } from 'src/app/models/player.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -11,6 +12,8 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class AddUpdateProductComponent  implements OnInit {
 
+  @Input() player: Player;
+
   form = new FormGroup({
     id: new FormControl(''),
 
@@ -18,41 +21,78 @@ export class AddUpdateProductComponent  implements OnInit {
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
     team: new FormControl('', [Validators.required, Validators.minLength(4)]),
     position: new FormControl('', [Validators.required]),
-    value: new FormControl('', [Validators.required, Validators.min(0.1)]),
+    value: new FormControl(null, [Validators.required, Validators.min(0.1)]),
 
-    age: new FormControl('', [Validators.required, Validators.min(16)]),
-    height: new FormControl('', [Validators.required, Validators.min(1.4)]),
+    age: new FormControl(null, [Validators.required, Validators.min(16)]),
+    height: new FormControl(null, [Validators.required, Validators.min(1.4)]),
     country: new FormControl('', [Validators.required, Validators.minLength(4)]),
 
-    matches: new FormControl('', [Validators.required, Validators.min(0)]),
-    goals: new FormControl('', [Validators.required, Validators.min(0)]),
-    assists: new FormControl('', [Validators.required, Validators.min(0)]),
-    yellows: new FormControl('', [Validators.required, Validators.min(0)]),
-    reds: new FormControl('', [Validators.required, Validators.min(0)])
+    matches: new FormControl(null, [Validators.required, Validators.min(0)]),
+    goals: new FormControl(null, [Validators.required, Validators.min(0)]),
+    assists: new FormControl(null, [Validators.required, Validators.min(0)]),
+    yellows: new FormControl(null, [Validators.required, Validators.min(0)]),
+    reds: new FormControl(null, [Validators.required, Validators.min(0)])
   })
 
   firebaseService = inject(FirebaseService);
   utilsService = inject(UtilsService);
 
+  user = {} as User;
+
   ngOnInit() {
+    this.user = this.utilsService.getFromLocalStorage('user');
+    if (this.player) {
+      this.form.setValue(this.player);
+    }
   }
 
-  async submit() {
+  // Tomar/Seleccionar Foto
+  async takeImage() {
+    const dataUrl = (await this.utilsService.takePicture('Imagen del Jugador')).dataUrl;
+    this.form.controls.image.setValue(dataUrl);
+  }
+
+  submit() {
     if (this.form.valid) {
+      if (this.player) {
+        this.updatePlayer();
+      } else {
+        this.createPlayer();
+      }
+    }
+  }
+
+  //Create
+  async createPlayer() {
+      let path = "jugadores";
+
       const loading = await this.utilsService.loading();
       await loading.present();
 
-      this.firebaseService.signUp(this.form.value as User).then(async res => {
-        await this.firebaseService.updateUser(this.form.value.name);
+      // Subir foto y obtener URL
+      let dataUrl = this.form.value.image;
+      let imagePath = "img/jugadores/" + Date.now();
+      let imageUrl = await this.firebaseService.uploadImage(imagePath, dataUrl);
+      this.form.controls.image.setValue(imageUrl);
 
-        let uid = res.user.uid;
+      delete this.form.value.id;
 
+      this.firebaseService.addDocument(path, this.form.value).then(async res => {
+        this.utilsService.dismissModal({ success: true });
+
+        this.utilsService.presentToast({
+          message: "Jugador ojeado exitosamente",
+          duration: 1500,
+          color: 'success',
+          position: 'top',
+          icon: 'checkmark-circle-outline'
+        });
 
       }).catch(er => {
         console.log(er);
         this.utilsService.presentToast({
           message: er.message,
-          duration: 2500,
+          duration: 1500,
           color: 'danger',
           position: 'top',
           icon: 'alert-circle-outline'
@@ -60,7 +100,48 @@ export class AddUpdateProductComponent  implements OnInit {
       }).finally(() => {
         loading.dismiss();
       });
-    }
+  }
+
+  // Update
+  async updatePlayer() {
+      let path = "jugadores/" + this.player.id;
+
+      const loading = await this.utilsService.loading();
+      await loading.present();
+
+      // Subir foto y obtener URL si esta cambia
+      if (this.form.value.image !== this.player.image) {
+        let dataUrl = this.form.value.image;
+        let imagePath = await this.firebaseService.getFilePath(this.player.image);
+        let imageUrl = await this.firebaseService.uploadImage(imagePath, dataUrl);
+        this.form.controls.image.setValue(imageUrl);
+      }
+
+      delete this.form.value.id;
+
+      this.firebaseService.updateDocument(path, this.form.value).then(async res => {
+        this.utilsService.dismissModal({ success: true });
+
+        this.utilsService.presentToast({
+          message: "Datos editados exitosamente",
+          duration: 1500,
+          color: 'success',
+          position: 'top',
+          icon: 'checkmark-circle-outline'
+        });
+
+      }).catch(er => {
+        console.log(er);
+        this.utilsService.presentToast({
+          message: er.message,
+          duration: 1500,
+          color: 'danger',
+          position: 'top',
+          icon: 'alert-circle-outline'
+        });
+      }).finally(() => {
+        loading.dismiss();
+      });
   }
 
 }

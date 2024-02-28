@@ -1,18 +1,73 @@
 <app-header title="Jugadores"></app-header>
 
 <ion-content [fullscreen]="true">
+
+  <!-- PLAYER LIST -->
+  <ion-list *ngIf="!loading && players.length !== 0">
+    <ion-item-sliding class="player-item" *ngFor="let p of players">
+
+      <ion-item>
+        <ion-avatar class="player-image" slot="start">
+          <img [src]="p.image" />
+        </ion-avatar>
+        <ion-label color="tertiary">
+          <div class="name"><strong>{{p.name}}</strong></div>
+          <div class="data">
+            <strong>&#x2022; Equipo: </strong> {{p.team}}
+            <br>
+            <strong>&#x2022; Posición: </strong> {{p.position}}
+            <br>
+            <strong>&#x2022; Valor de mercado: </strong> {{p.value}}M€
+          </div>
+        </ion-label>
+      </ion-item>
+
+      <!-- Botones -->
+      <ion-item-options>
+
+        <!-- Edit -->
+        <ion-item-option color="tertiary" (click)="addUpdatePlayer(p)">
+          <ion-icon class="option-btn" name="create-outline"></ion-icon>
+        </ion-item-option>
   
+        <!-- Delete -->
+        <ion-item-option color="danger" (click)="confirmDelete(p)">
+          <ion-icon class="option-btn" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+  </ion-list>
+
+
+  <!-- LOADING -->
+  <ion-list *ngIf="loading">
+    <ion-item class="player-item" *ngFor="let p of [1,1,1,1,1,1,1,1,1,1,1,1,1,]">
+      <ion-avatar class="player-image" slot="start">
+        <ion-skeleton-text animated style="width: 100%; height: 100%;"></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label color="tertiary">
+        <div><ion-skeleton-text animated style="width: 50%"></ion-skeleton-text></div>
+        <div><ion-skeleton-text animated style="width: 30%"></ion-skeleton-text></div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <!-- EMPTY -->
+  <ion-content *ngIf="!loading && players.length == 0">
+    <div class="ion-text-center puntitos">
+      <ion-icon name="ellipsis-horizontal"></ion-icon>
+    </div>
+    <div><p class="ion-text-center noPlayers"><strong>No hay jugadores para ojear...</strong></p></div>
+  </ion-content>
+  
+
   <!-- NEW PLAYER -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="addUpdatePlayer()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-  <ion-button (click)="signOut()" expand="block" mode="ios" color="secondary">
-    Cerrar sesion
-  </ion-button>
-
-  
 
 </ion-content>

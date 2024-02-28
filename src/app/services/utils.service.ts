@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
+import { AlertController, AlertOptions, LoadingController, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,14 @@ export class UtilsService {
   toastController = inject(ToastController);
   modalController = inject(ModalController);
   router = inject(Router);
+  alertController = inject(AlertController);
 
   // Loading
   loading() {
     return this.loadingController.create({
       spinner: 'circles',
       cssClass: 'custom-loading',
-      message: 'Accediendo...',
+      message: 'Cargando...',
       mode: 'ios'
     })
   }
@@ -54,6 +56,25 @@ export class UtilsService {
   // LocalStorage GET
   getFromLocalStorage(key: string) {
     return JSON.parse(localStorage.getItem(key));
+  }
+
+  // Camera
+  async takePicture(promptLabelHeader: string) {
+    return await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Prompt,
+      promptLabelHeader,
+      promptLabelPhoto: 'Selecciona una imagen',
+      promptLabelPicture: 'Toma una foto'
+    });
+  }
+
+  // Alert
+  async presentAlert(opts?: AlertOptions) {
+    const alert = await this.alertController.create(opts);
+    await alert.present();
   }
   
 }

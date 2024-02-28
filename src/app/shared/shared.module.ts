@@ -6,6 +6,7 @@ import { LogoComponent } from './components/logo/logo.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddUpdatePlayerComponent } from './components/add-update-player/add-update-player.component';
+import { FullViewPlayerComponent } from './components/full-view-player/full-view-player.component';
 
 
 
@@ -14,13 +15,15 @@ import { AddUpdatePlayerComponent } from './components/add-update-player/add-upd
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
-    AddUpdatePlayerComponent
+    AddUpdatePlayerComponent,
+    FullViewPlayerComponent
   ],
   exports: [
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
-    AddUpdatePlayerComponent
+    AddUpdatePlayerComponent,
+    FullViewPlayerComponent
   ],
   imports: [
     CommonModule,

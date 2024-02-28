@@ -15,7 +15,7 @@
   <ion-list *ngIf="!loading && players.length !== 0">
     <ion-item-sliding class="player-item" *ngFor="let p of searchedPlayer">
 
-      <ion-item>
+      <ion-item (click)="fullViewPlayer(p)">
         <ion-avatar class="player-image" slot="start">
           <img [src]="p.image" />
         </ion-avatar>

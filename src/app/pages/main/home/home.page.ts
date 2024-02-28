@@ -5,6 +5,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AddUpdatePlayerComponent } from 'src/app/shared/components/add-update-player/add-update-player.component';
 import { orderBy } from "firebase/firestore";
+import { FullViewPlayerComponent } from 'src/app/shared/components/full-view-player/full-view-player.component';
 
 @Component({
   selector: 'app-home',
@@ -61,7 +62,18 @@ export class HomePage implements OnInit {
     });
   }
 
-  // Agregar/editar jugador
+  // Modal para ver datos de jugador
+  async fullViewPlayer(player?: Player) {
+    let success = await this.utilsService.presentModal({
+      component: FullViewPlayerComponent,
+      cssClass: 'full-view-modal',
+
+      componentProps: { player }
+    });
+    this.getPlayers();
+  }
+
+  // Modal para agregar/editar jugador
   async addUpdatePlayer(player?: Player) {
     let success = await this.utilsService.presentModal({
       component: AddUpdatePlayerComponent,

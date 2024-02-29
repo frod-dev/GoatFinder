@@ -88,8 +88,6 @@ export class AddUpdatePlayerComponent  implements OnInit {
       let imageUrl = await this.firebaseService.uploadImage(imagePath, dataUrl);
       this.form.controls.image.setValue(imageUrl);
 
-      delete this.form.value.id;
-
       this.firebaseService.addDocument(path, this.form.value).then(async res => {
         this.utilsService.dismissModal({ success: true });
 
@@ -129,8 +127,6 @@ export class AddUpdatePlayerComponent  implements OnInit {
         let imageUrl = await this.firebaseService.uploadImage(imagePath, dataUrl);
         this.form.controls.image.setValue(imageUrl);
       }
-
-      delete this.form.value.id;
 
       this.firebaseService.updateDocument(path, this.form.value).then(async res => {
         this.utilsService.dismissModal({ success: true });

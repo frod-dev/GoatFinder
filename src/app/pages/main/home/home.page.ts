@@ -20,6 +20,7 @@ export class HomePage implements OnInit {
   players: Player[] = [];
   searchedPlayer: any;
   loading: boolean = false;
+  searchHide: boolean = true;
 
   ngOnInit() {
   }
@@ -41,7 +42,7 @@ export class HomePage implements OnInit {
   }
 
 
-  // Obtener jugador
+  // Obtener jugadores
   getPlayers() {
     let path = "jugadores";
 
@@ -53,10 +54,10 @@ export class HomePage implements OnInit {
 
     let sub = this.firebaseService.getCollectionData(path, query).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.players = res;
         this.searchedPlayer = this.players;
         this.loading = false;
+        this.searchHide = false;
         sub.unsubscribe();
       }
     });
@@ -121,6 +122,7 @@ export class HomePage implements OnInit {
       });
     }).finally(() => {
       loading.dismiss();
+      this.getPlayers();
     });
   }
 

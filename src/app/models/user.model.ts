@@ -4,5 +4,5 @@ export interface User{
     password: string,
     name: string,
     image: string,
-    //favorites: string[]
+    favorites: string
 }

@@ -1,0 +1,45 @@
+ion-avatar {
+    top: 14px;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+}
+
+.player-data {
+    color: var(--ion-color-tertiary);
+    font-size: 16px;
+}
+
+.general-data {
+    text-align: center;
+}
+
+ion-grid {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.match-data {
+    padding-bottom: 8px;
+}
+
+.grid-var {
+    right: 0;
+}
+
+ion-chip {
+    margin-top: 24px;
+    font-size: 20px;
+    color: var(--ion-color-tertiary);
+    border-color: var(--ion-color-secondary);
+}
+
+.market-data {
+    padding: 2% 2% 2% 2%;
+}
+
+.fav-button {
+    position: absolute;
+    top: 64px;
+    right: 10px;
+}

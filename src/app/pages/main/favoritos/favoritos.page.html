@@ -1,4 +1,4 @@
-<app-header [showMenu]="true" title="Jugadores"></app-header>
+<app-header [showMenu]="true" title="Favoritos"></app-header>
 
 <ion-content [fullscreen]="true">
 
@@ -31,20 +31,6 @@
         </ion-label>
       </ion-item>
 
-      <!-- Botones -->
-      <ion-item-options>
-
-        <!-- Edit -->
-        <ion-item-option color="tertiary" (click)="addUpdatePlayer(p)">
-          <ion-icon class="option-btn" name="create-outline"></ion-icon>
-        </ion-item-option>
-  
-        <!-- Delete -->
-        <ion-item-option color="danger" (click)="confirmDelete(p)">
-          <ion-icon class="option-btn" name="trash-outline"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-
     </ion-item-sliding>
   </ion-list>
 
@@ -70,13 +56,5 @@
     </div>
     <div><p class="ion-text-center noPlayers"><strong>No hay jugadores para ojear...</strong></p></div>
   </ion-content>
-  
-
-  <!-- NEW PLAYER -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="addUpdatePlayer()">
-      <ion-icon name="person-add-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 
 </ion-content>

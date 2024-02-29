@@ -1,0 +1,29 @@
+.player-image {
+    width: 100px;
+    height: 80px;
+}
+
+.name {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.puntitos {
+    font-size: 80px;
+    margin-bottom: -40px;
+    color: var(--ion-color-secondary);
+}
+
+.noPlayers {
+    font-size: 18px;
+    color: var(--ion-color-secondary);
+}
+
+.data{
+    margin-left: 4px;
+}
+
+ion-searchbar {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}

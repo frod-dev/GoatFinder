@@ -1,1 +1,65 @@
 <app-header [isModal]="true" title="{{player.name}}"></app-header>
+
+<ion-content [fullscreen]="true">
+
+    <!-- FAVORITO -->
+    <ion-button *ngIf="!esFavorito()" (click)="addFav()" class="fav-button" outline="true" fill="outline" color="warning">
+        <ion-icon slot="icon-only" name="star-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button *ngIf="esFavorito()" (click)="delFav()" class="fav-button" fill="outline" color="warning">
+        <ion-icon slot="icon-only" name="star"></ion-icon>
+    </ion-button>
+
+    <!-- DATOS -->
+    <ion-avatar class="ion-padding-top">
+        <img [src]="player.image" />
+    </ion-avatar>
+    
+    <div class="player-data">
+        <h2 class="ion-text-center"><strong>{{player.name}}</strong></h2>
+        <div class="ion-padding general-data">
+            <p><strong>Edad: </strong>{{player.age}} años</p>
+            <p><strong>Altura: </strong>{{player.height}}m</p>
+            <p><strong>País: </strong>{{player.country}}</p>
+            <p><strong>Posición: </strong>{{player.position}}</p>
+            <p><strong>Equipo: </strong>{{player.team}}</p>
+        </div>
+    </div>
+
+    <ion-grid fixed>
+        <ion-row class="player-data">
+            <ion-col>
+                <div class="match-data">
+                    <ion-icon name="person" color="success"></ion-icon>
+                    <strong> Partidos: </strong>{{player.matches}}
+                </div>
+                <div class="match-data">
+                    <ion-icon name="football" color="success"></ion-icon>
+                    <strong> Goles: </strong>{{player.goals}}
+                </div>
+                <div class="match-data">
+                    <ion-icon name="hand-right" color="success"></ion-icon>
+                    <strong> Asistencias: </strong>{{player.assists}}
+                </div>
+            </ion-col>
+            <ion-col>
+                <div class="match-data">
+                    <ion-icon name="tablet-portrait" color="warning"></ion-icon>
+                    <strong> Amarillas: </strong>{{player.yellows}}
+                </div>
+                <div class="match-data">
+                    <ion-icon name="tablet-portrait" color="danger"></ion-icon>
+                    <strong> Rojas: </strong>{{player.reds}}
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <div class="ion-text-center">
+        <ion-chip outline="true" mode="ios" >
+            <ion-label class="market-data"><strong>Valor de mercado: </strong>{{player.value}}M€</ion-label>
+        </ion-chip>
+    </div>
+
+</ion-content>

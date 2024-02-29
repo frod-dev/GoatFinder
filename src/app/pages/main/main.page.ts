@@ -21,6 +21,11 @@ export class MainPage implements OnInit {
       title: 'Perfil',
       url: '/main/profile',
       icon: 'person-outline'
+    },
+    {
+      title: 'Favoritos',
+      url: '/main/favoritos',
+      icon: 'star-outline'
     }
   ]
 

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddUpdatePlayerComponent } from './components/add-update-player/add-update-player.component';
 import { FullViewPlayerComponent } from './components/full-view-player/full-view-player.component';
+import { MercatoPipe } from './pipes/mercato.pipe';
 
 
 
@@ -16,14 +17,16 @@ import { FullViewPlayerComponent } from './components/full-view-player/full-view
     CustomInputComponent,
     LogoComponent,
     AddUpdatePlayerComponent,
-    FullViewPlayerComponent
+    FullViewPlayerComponent,
+    MercatoPipe
   ],
   exports: [
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
     AddUpdatePlayerComponent,
-    FullViewPlayerComponent
+    FullViewPlayerComponent,
+    MercatoPipe
   ],
   imports: [
     CommonModule,

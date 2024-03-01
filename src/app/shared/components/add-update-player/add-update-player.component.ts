@@ -89,8 +89,11 @@ export class AddUpdatePlayerComponent  implements OnInit {
       this.form.controls.image.setValue(imageUrl);
 
       this.firebaseService.addDocument(path, this.form.value).then(async res => {
-        this.utilsService.dismissModal({ success: true });
+        this.form.controls.id.setValue(res.id);
+        this.firebaseService.updateDocument((path + "/" + res.id), this.form.value);
 
+        this.utilsService.dismissModal({ success: true });
+        
         this.utilsService.presentToast({
           message: "Jugador ojeado exitosamente",
           duration: 1500,

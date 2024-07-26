@@ -1,4 +1,5 @@
 # GoatFinder
 
-App para Android hecha con Ionic Angular que usa una base de datos Firestore.
-Se supone que es un proyecto serio pero unos guajes a los que llamo amigos me tienen la base de datos cómica de narices.
+Mobile app to enhance simple football player scouting. Has the posibility to be edited in order to allow the scouting of players from other sports.
+
+Developed using Ionic framework with Angular 17, Firebase Backend-as-a-Service and Firestore NoSQL database.
